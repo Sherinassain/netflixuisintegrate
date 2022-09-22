@@ -1,0 +1,6 @@
+import 'package:netflixuis/infrastracture/api_key.dart';
+import 'package:netflixuis/widgets/string.dart';
+
+class apiendpoints {
+  static const downloads = '$baseurl/trending/all/week?api_key=$apikey';
+}
