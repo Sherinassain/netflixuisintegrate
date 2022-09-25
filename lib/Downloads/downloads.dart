@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflixuis/dbloc/downloads/downloads_bloc.dart';
 import 'package:netflixuis/pages/conswidgets/appbars.dart';
 import 'package:netflixuis/pages/conswidgets/constantelements.dart';
 import 'package:netflixuis/Downloads/downloadsections.dart';
@@ -27,6 +29,11 @@ class screendownloads extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      BlocProvider.of<DownloadsBloc>(context)
+          .add(Downloadsevent.getDownloadimage());
+    });
+
     final Size screensize = MediaQuery.of(context).size;
     return Scaffold(
         appBar: PreferredSize(
@@ -36,7 +43,7 @@ class screendownloads extends StatelessWidget {
             )),
         backgroundColor: Colors.black,
         body: ListView.separated(
-          padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
             itemBuilder: (context, index) {
               return _downloadwidgets[index];
             },

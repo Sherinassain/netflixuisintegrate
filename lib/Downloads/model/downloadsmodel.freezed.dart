@@ -12,11 +12,30 @@ part of 'downloadsmodel.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Downloadmodel _$DownloadmodelFromJson(Map<String, dynamic> json) {
   return _Downloadmodel.fromJson(json);
 }
+
+/// @nodoc
+class _$DownloadmodelTearOff {
+  const _$DownloadmodelTearOff();
+
+  _Downloadmodel call(
+      {@JsonKey(name: "poster_path") required String? posterpath}) {
+    return _Downloadmodel(
+      posterpath: posterpath,
+    );
+  }
+
+  Downloadmodel fromJson(Map<String, Object?> json) {
+    return Downloadmodel.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Downloadmodel = _$DownloadmodelTearOff();
 
 /// @nodoc
 mixin _$Downloadmodel {
@@ -60,31 +79,31 @@ class _$DownloadmodelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_DownloadmodelCopyWith<$Res>
+abstract class _$DownloadmodelCopyWith<$Res>
     implements $DownloadmodelCopyWith<$Res> {
-  factory _$$_DownloadmodelCopyWith(
-          _$_Downloadmodel value, $Res Function(_$_Downloadmodel) then) =
-      __$$_DownloadmodelCopyWithImpl<$Res>;
+  factory _$DownloadmodelCopyWith(
+          _Downloadmodel value, $Res Function(_Downloadmodel) then) =
+      __$DownloadmodelCopyWithImpl<$Res>;
   @override
   $Res call({@JsonKey(name: "poster_path") String? posterpath});
 }
 
 /// @nodoc
-class __$$_DownloadmodelCopyWithImpl<$Res>
+class __$DownloadmodelCopyWithImpl<$Res>
     extends _$DownloadmodelCopyWithImpl<$Res>
-    implements _$$_DownloadmodelCopyWith<$Res> {
-  __$$_DownloadmodelCopyWithImpl(
-      _$_Downloadmodel _value, $Res Function(_$_Downloadmodel) _then)
-      : super(_value, (v) => _then(v as _$_Downloadmodel));
+    implements _$DownloadmodelCopyWith<$Res> {
+  __$DownloadmodelCopyWithImpl(
+      _Downloadmodel _value, $Res Function(_Downloadmodel) _then)
+      : super(_value, (v) => _then(v as _Downloadmodel));
 
   @override
-  _$_Downloadmodel get _value => super._value as _$_Downloadmodel;
+  _Downloadmodel get _value => super._value as _Downloadmodel;
 
   @override
   $Res call({
     Object? posterpath = freezed,
   }) {
-    return _then(_$_Downloadmodel(
+    return _then(_Downloadmodel(
       posterpath: posterpath == freezed
           ? _value.posterpath
           : posterpath // ignore: cast_nullable_to_non_nullable
@@ -115,32 +134,29 @@ class _$_Downloadmodel implements _Downloadmodel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Downloadmodel &&
+            other is _Downloadmodel &&
             const DeepCollectionEquality()
                 .equals(other.posterpath, posterpath));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(posterpath));
 
   @JsonKey(ignore: true)
   @override
-  _$$_DownloadmodelCopyWith<_$_Downloadmodel> get copyWith =>
-      __$$_DownloadmodelCopyWithImpl<_$_Downloadmodel>(this, _$identity);
+  _$DownloadmodelCopyWith<_Downloadmodel> get copyWith =>
+      __$DownloadmodelCopyWithImpl<_Downloadmodel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DownloadmodelToJson(
-      this,
-    );
+    return _$$_DownloadmodelToJson(this);
   }
 }
 
 abstract class _Downloadmodel implements Downloadmodel {
   const factory _Downloadmodel(
-          {@JsonKey(name: "poster_path") required final String? posterpath}) =
+          {@JsonKey(name: "poster_path") required String? posterpath}) =
       _$_Downloadmodel;
 
   factory _Downloadmodel.fromJson(Map<String, dynamic> json) =
@@ -151,6 +167,6 @@ abstract class _Downloadmodel implements Downloadmodel {
   String? get posterpath;
   @override
   @JsonKey(ignore: true)
-  _$$_DownloadmodelCopyWith<_$_Downloadmodel> get copyWith =>
+  _$DownloadmodelCopyWith<_Downloadmodel> get copyWith =>
       throw _privateConstructorUsedError;
 }

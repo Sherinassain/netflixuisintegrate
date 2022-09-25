@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflixuis/core/di/injectable.dart';
+import 'package:netflixuis/dbloc/downloads/downloads_bloc.dart';
 import 'package:netflixuis/widgets/home_page.dart';
 import 'package:netflixuis/widgets/colors.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureinjection();
   runApp(Myapp());
 }
 
@@ -11,16 +16,22 @@ class Myapp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          primarySwatch: Colors.blue,
-          backgroundColor: Colors.black,
-          textTheme: TextTheme(
-              bodyText1: TextStyle(color: Colors.white),
-              bodyText2: TextStyle(color: Colors.white)),
-          appBarTheme: AppBarTheme(backgroundColor: constblack)),
-      home: Home_page(),
+    return MultiBlocProvider(
+      
+      providers: [
+        BlocProvider(create: (ctx)=>getit<DownloadsBloc>())
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            primarySwatch: Colors.blue,
+            backgroundColor: Colors.black,
+            textTheme: TextTheme(
+                bodyText1: TextStyle(color: Colors.white),
+                bodyText2: TextStyle(color: Colors.white)),
+            appBarTheme: AppBarTheme(backgroundColor: constblack)),
+        home: Home_page(),
+      ),
     );
   }
 }
