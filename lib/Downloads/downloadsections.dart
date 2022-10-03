@@ -83,7 +83,7 @@ class Section2 extends StatelessWidget {
                         //image container
                         Image_container(
                           imageindexnumber:
-                              '$imageappendurl${state.downloads![0].posterpath}',
+                              '$imageappendurl${state.downloads[3].posterpath}',
                           imagewidth: 0.35,
                           imageheight: 0.24,
                           imageangle: -23,
@@ -92,7 +92,7 @@ class Section2 extends StatelessWidget {
                         ),
                         Image_container(
                           imageindexnumber:
-                              '$imageappendurl${state.downloads![1].posterpath}',
+                              '$imageappendurl${state.downloads[1].posterpath}',
                           imagewidth: 0.35,
                           imageheight: 0.24,
                           imageangle: 23,
@@ -101,7 +101,7 @@ class Section2 extends StatelessWidget {
                         ),
                         Image_container(
                           imageindexnumber:
-                              '$imageappendurl${state.downloads![2].posterpath}',
+                              '$imageappendurl${state.downloads[2].posterpath}',
                           imagewidth: 0.35,
                           imageheight: 0.28,
                         ),

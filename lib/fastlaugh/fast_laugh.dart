@@ -13,7 +13,7 @@ class Screenfastlaugh extends StatelessWidget {
         backgroundColor: Colors.black,
         body: SafeArea(
             child: PageView(
-              scrollDirection: Axis.vertical,
+          scrollDirection: Axis.vertical,
           children: List.generate(10, (index) {
             return Fastlaugh_container(index: index);
           }),

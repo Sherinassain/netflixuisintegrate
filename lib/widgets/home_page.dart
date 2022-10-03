@@ -9,7 +9,7 @@ import 'package:netflixuis/Search/search_page.dart';
 import 'package:netflixuis/widgets/bottomnavigationbar.dart';
 
 class Home_page extends StatelessWidget {
-   Home_page({Key? key}) : super(key: key);
+  Home_page({Key? key}) : super(key: key);
   final pages = [
     Screenhome(),
     Screennewandhot(),
@@ -22,9 +22,11 @@ class Home_page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body:ValueListenableBuilder(valueListenable: indexchangenotifier, builder: (context,int new1,_){
-        return pages[new1];
-      }),
+      body: ValueListenableBuilder(
+          valueListenable: indexchangenotifier,
+          builder: (context, int new1, _) {
+            return pages[new1];
+          }),
       bottomNavigationBar: Bottomnav(),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflixuis/Search/searchbloc/search_bloc.dart';
 import 'package:netflixuis/core/di/injectable.dart';
 import 'package:netflixuis/dbloc/downloads/downloads_bloc.dart';
 import 'package:netflixuis/widgets/home_page.dart';
@@ -17,9 +18,8 @@ class Myapp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      
-      providers: [
-        BlocProvider(create: (ctx)=>getit<DownloadsBloc>())
+      providers: [BlocProvider(create: (ctx) => getit<DownloadsBloc>()),
+      BlocProvider(create: (ctx)=>getit<SearchBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

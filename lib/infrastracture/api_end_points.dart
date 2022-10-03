@@ -3,4 +3,6 @@ import 'package:netflixuis/widgets/string.dart';
 
 class apiendpoints {
   static const downloads = '$baseurl/trending/all/week?api_key=$apikey';
+  static const search =
+      '$baseurl/search/movie?api_key=$apikey';
 }

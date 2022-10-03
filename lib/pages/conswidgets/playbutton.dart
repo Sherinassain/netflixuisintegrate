@@ -9,7 +9,7 @@ class Play_button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        final Size screensize = MediaQuery.of(context).size;
+    final Size screensize = MediaQuery.of(context).size;
     return Stack(
       children: [
         SizedBox(

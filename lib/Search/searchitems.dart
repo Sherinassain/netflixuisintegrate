@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflixuis/Search/searchbloc/search_bloc.dart';
 import 'package:netflixuis/Search/searchpage_containers.dart';
+import 'package:netflixuis/pages/conswidgets/apiimageconsturl.dart';
+
+import 'Search_idle_containers.dart';
 
 class Searchitemlist extends StatelessWidget {
   Searchitemlist({Key? key}) : super(key: key);
@@ -14,19 +19,40 @@ class Searchitemlist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size screensize = MediaQuery.of(context).size;
-    return Container(
-      
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: ListView.separated(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return Searchboxcontainers();
-          },
-          separatorBuilder: (context, index) {
-            return SizedBox(height: 1,);
-          },
-          itemCount: 15));
+    return BlocBuilder<SearchBloc, SearchState>(
+      builder: (context, state) {
+        if (state.isloading) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state.iserror) {
+          return Center(
+            child: Text('Error while getting data'),
+          );
+        } else if (state.idlelist.isEmpty) {
+          return Center(
+            child: Text('List is empty'),
+          );
+        }
+        return ListView.separated(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              final movie = state.idlelist[index];
+
+              return Searchboxcontainers(
+                  imageurl: '$imageappendurl${movie.posterpath}',
+                  title: movie.title ?? 'No title provided');
+            },
+            separatorBuilder: (context, index) {
+              return SizedBox(
+                height: screensize.width * 0.04,
+              );
+            },
+            itemCount: state.idlelist.length);
+      },
+    );
+
+    // },
   }
 }

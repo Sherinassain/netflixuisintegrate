@@ -9,7 +9,7 @@ class Search_title extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-    title,
+      title,
       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     );
   }

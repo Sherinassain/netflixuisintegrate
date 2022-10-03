@@ -22,22 +22,28 @@ class Fastlaugh_container extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   CircleAvatar(
-                    backgroundColor: Colors.black.withOpacity(0.5),
+                      backgroundColor: Colors.black.withOpacity(0.5),
                       radius: 30,
                       child: IconButton(
-                          onPressed: () {}, icon: Icon(Icons.volume_off,color: constwhite,size: 30,))),
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.volume_off,
+                            color: constwhite,
+                            size: 30,
+                          ))),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       //video Widgets
                       CircleAvatar(
                         radius: 30,
-                        backgroundImage: NetworkImage('https://static.toiimg.com/photo/msid-83977775/83977775.jpg'),
+                        backgroundImage: NetworkImage(
+                            'https://static.toiimg.com/photo/msid-83977775/83977775.jpg'),
                       ),
-                     Video_widgets(icon: Icons.insert_emoticon, title: 'LoL'),
-                     Video_widgets(icon: Icons.add, title: 'My List'),
-                     Video_widgets(icon: Icons.share, title: 'Share'),
-                     Video_widgets(icon: Icons.play_arrow, title: 'Play'),
+                      Video_widgets(icon: Icons.insert_emoticon, title: 'LoL'),
+                      Video_widgets(icon: Icons.add, title: 'My List'),
+                      Video_widgets(icon: Icons.share, title: 'Share'),
+                      Video_widgets(icon: Icons.play_arrow, title: 'Play'),
                     ],
                   ),
                 ],
@@ -51,7 +57,8 @@ class Fastlaugh_container extends StatelessWidget {
 }
 
 class Video_widgets extends StatelessWidget {
-  Video_widgets({Key? key,required this.icon,required this.title}) : super(key: key);
+  Video_widgets({Key? key, required this.icon, required this.title})
+      : super(key: key);
   final IconData icon;
   final String title;
   @override
@@ -60,13 +67,14 @@ class Video_widgets extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-        
-         Icon(icon,color: constwhite,),
-         Text(title,style: TextStyle(color: constwhite,fontSize: 14),),
-       
-
-
-
+          Icon(
+            icon,
+            color: constwhite,
+          ),
+          Text(
+            title,
+            style: TextStyle(color: constwhite, fontSize: 14),
+          ),
         ],
       ),
     );

@@ -184,7 +184,7 @@ class _$DownloadstateTearOff {
 
   _Downloadstate call(
       {required bool isloading,
-      List<Downloadmodel>? downloads,
+      required List<Downloadmodel> downloads,
       required Option<Either<Mainfailures, List<Downloadmodel>>>
           downloadsucessorfailure}) {
     return _Downloadstate(
@@ -201,7 +201,7 @@ const $Downloadstate = _$DownloadstateTearOff();
 /// @nodoc
 mixin _$Downloadstate {
   bool get isloading => throw _privateConstructorUsedError;
-  List<Downloadmodel>? get downloads => throw _privateConstructorUsedError;
+  List<Downloadmodel> get downloads => throw _privateConstructorUsedError;
   Option<Either<Mainfailures, List<Downloadmodel>>>
       get downloadsucessorfailure => throw _privateConstructorUsedError;
 
@@ -217,7 +217,7 @@ abstract class $DownloadstateCopyWith<$Res> {
       _$DownloadstateCopyWithImpl<$Res>;
   $Res call(
       {bool isloading,
-      List<Downloadmodel>? downloads,
+      List<Downloadmodel> downloads,
       Option<Either<Mainfailures, List<Downloadmodel>>>
           downloadsucessorfailure});
 }
@@ -245,7 +245,7 @@ class _$DownloadstateCopyWithImpl<$Res>
       downloads: downloads == freezed
           ? _value.downloads
           : downloads // ignore: cast_nullable_to_non_nullable
-              as List<Downloadmodel>?,
+              as List<Downloadmodel>,
       downloadsucessorfailure: downloadsucessorfailure == freezed
           ? _value.downloadsucessorfailure
           : downloadsucessorfailure // ignore: cast_nullable_to_non_nullable
@@ -263,7 +263,7 @@ abstract class _$DownloadstateCopyWith<$Res>
   @override
   $Res call(
       {bool isloading,
-      List<Downloadmodel>? downloads,
+      List<Downloadmodel> downloads,
       Option<Either<Mainfailures, List<Downloadmodel>>>
           downloadsucessorfailure});
 }
@@ -293,7 +293,7 @@ class __$DownloadstateCopyWithImpl<$Res>
       downloads: downloads == freezed
           ? _value.downloads
           : downloads // ignore: cast_nullable_to_non_nullable
-              as List<Downloadmodel>?,
+              as List<Downloadmodel>,
       downloadsucessorfailure: downloadsucessorfailure == freezed
           ? _value.downloadsucessorfailure
           : downloadsucessorfailure // ignore: cast_nullable_to_non_nullable
@@ -307,13 +307,13 @@ class __$DownloadstateCopyWithImpl<$Res>
 class _$_Downloadstate implements _Downloadstate {
   const _$_Downloadstate(
       {required this.isloading,
-      this.downloads,
+      required this.downloads,
       required this.downloadsucessorfailure});
 
   @override
   final bool isloading;
   @override
-  final List<Downloadmodel>? downloads;
+  final List<Downloadmodel> downloads;
   @override
   final Option<Either<Mainfailures, List<Downloadmodel>>>
       downloadsucessorfailure;
@@ -350,14 +350,14 @@ class _$_Downloadstate implements _Downloadstate {
 abstract class _Downloadstate implements Downloadstate {
   const factory _Downloadstate(
       {required bool isloading,
-      List<Downloadmodel>? downloads,
+      required List<Downloadmodel> downloads,
       required Option<Either<Mainfailures, List<Downloadmodel>>>
           downloadsucessorfailure}) = _$_Downloadstate;
 
   @override
   bool get isloading;
   @override
-  List<Downloadmodel>? get downloads;
+  List<Downloadmodel> get downloads;
   @override
   Option<Either<Mainfailures, List<Downloadmodel>>> get downloadsucessorfailure;
   @override
