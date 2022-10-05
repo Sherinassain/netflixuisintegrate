@@ -1,5 +1,3 @@
-
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -23,10 +21,15 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       : super(SearchState.initial()) {
     on<Initilize>((event, emit) async {
       //get trending
+
+      if (state.idlelist.isNotEmpty) {
+        emit(state);
+        return;
+      }
       emit(SearchState(
           searchresultlist: [], idlelist: [], isloading: true, iserror: false));
       final _results = await _downloadsrepo.getDownloadimage();
-      final state = _results.fold((Mainfailures f) {
+      final _state = _results.fold((Mainfailures f) {
         return SearchState(
             searchresultlist: [],
             idlelist: [],
@@ -41,13 +44,29 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       });
 
       //show it ui
-      emit(state);
+      emit(_state);
     });
-    on<Searchmovie>((event, emit) {
+    on<Searchmovie>((event, emit) async {
       //call search movie api
-      _searchesrepo.searchmovies(moviequery: event.moviequery);
-
+      final _result =
+          await _searchesrepo.searchmovies(moviequery: event.moviequery);
+      emit(SearchState(
+          searchresultlist: [], idlelist: [], isloading: true, iserror: false));
       //show to ui
+      final _searchresults = _result.fold((Mainfailures f) {
+        return SearchState(
+            searchresultlist: [],
+            idlelist: [],
+            isloading: false,
+            iserror: true);
+      }, (searchsucess) {
+        return SearchState(
+            searchresultlist: searchsucess.results,
+            idlelist: [],
+            isloading: false,
+            iserror: false);
+      });
+      emit(_searchresults);
     });
   }
 }

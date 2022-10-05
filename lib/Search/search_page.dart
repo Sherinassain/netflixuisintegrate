@@ -9,8 +9,11 @@ import 'package:netflixuis/pages/conswidgets/constantelements.dart';
 import 'package:netflixuis/Search/Searchresult_page.dart';
 import 'package:netflixuis/Search/searchitems.dart';
 
+import '../infrastracture/debouncer/debouncer.dart';
+
 class Screensearch extends StatelessWidget {
-  const Screensearch({Key? key}) : super(key: key);
+  Screensearch({Key? key}) : super(key: key);
+  final _debouncer = Debouncer(milliseconds: 3000);
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +33,15 @@ class Screensearch extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(10),
               child: CupertinoSearchTextField(
+                onChanged: (value) {
+                  if (value.isEmpty) {
+                    return;
+                  }
+                  _debouncer.run(() {
+                    return BlocProvider.of<SearchBloc>(context)
+                        .add(Searchmovie(moviequery: value));
+                  });
+                },
                 backgroundColor: Colors.grey.withOpacity(0.4),
                 style: TextStyle(color: Colors.white),
                 prefixIcon: Icon(
@@ -48,7 +60,15 @@ class Screensearch extends StatelessWidget {
             SizedBox(
               height: constantwidths,
             ),
-            Expanded(child: Searchitemlist()),
+            Expanded(child: BlocBuilder<SearchBloc, SearchState>(
+              builder: (context, state) {
+                if (state.searchresultlist.isEmpty) {
+                  return Searchitemlist();
+                } else {
+                  return Searchresult_page();
+                }
+              },
+            )),
             // Expanded(child: Searchresult_page())
           ],
         ),
