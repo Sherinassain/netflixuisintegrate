@@ -6,6 +6,8 @@ import 'package:netflixuis/dbloc/downloads/downloads_bloc.dart';
 import 'package:netflixuis/widgets/home_page.dart';
 import 'package:netflixuis/widgets/colors.dart';
 
+import 'fastlaugh/fastlaugh/fast_laugh_bloc.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureinjection();
@@ -20,6 +22,7 @@ class Myapp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [BlocProvider(create: (ctx) => getit<DownloadsBloc>()),
       BlocProvider(create: (ctx)=>getit<SearchBloc>()),
+       BlocProvider(create: (ctx)=>getit<FastLaughBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
