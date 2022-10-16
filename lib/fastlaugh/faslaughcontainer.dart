@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netflixuis/Downloads/model/downloadsmodel.dart';
 import 'package:netflixuis/fastlaugh/fastlaugh/fast_laugh_bloc.dart';
 import 'package:netflixuis/pages/conswidgets/apiimageconsturl.dart';
@@ -66,7 +69,35 @@ class Fastlaugh_container extends StatelessWidget {
                           ? null
                           : NetworkImage('$imageappendurl$posterpath'),
                     ),
-                    Video_widgets(icon: Icons.insert_emoticon, title: 'LoL'),
+                    ValueListenableBuilder(
+                      valueListenable: likedvideosidNotifier,
+                      builder: (BuildContext context, Set<int> newlikedlistids,
+                          Widget? _) {
+                        final _index = index;
+                        if (newlikedlistids.contains(_index)) {
+                          return GestureDetector(
+                            onTap: () {
+                              // BlocProvider.of<FastLaughBloc>(context)
+                              //     .add(Unlikedvideo(id: _index));
+                              likedvideosidNotifier.value.remove(_index);
+                              likedvideosidNotifier.notifyListeners();
+                            },
+                            child: Video_widgets(
+                                icon: Icons.favorite_outline, title: 'Liked'),
+                          );
+                        }
+                        return GestureDetector(
+                          onTap: () {
+                            //  BlocProvider.of<FastLaughBloc>(context)
+                            //     .add(Likedvideo(id: _index));
+                            likedvideosidNotifier.value.add(_index);
+                            likedvideosidNotifier.notifyListeners();
+                          },
+                          child: Video_widgets(
+                              icon: Icons.insert_emoticon, title: 'LoL'),
+                        );
+                      },
+                    ),
                     Video_widgets(icon: Icons.add, title: 'My List'),
                     GestureDetector(
                         onTap: () {
