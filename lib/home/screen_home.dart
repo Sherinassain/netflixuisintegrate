@@ -88,6 +88,16 @@ class Screenhome extends StatelessWidget {
                                     return '$imageappendurl${m.posterPath}';
                                   }).toList();
                                   _southindian.shuffle();
+
+                                  //top10 tv shows
+
+                                    final _top10tv =
+                                      state.trendingtvlist.map((t) {
+                                    return '$imageappendurl${t.posterPath}';
+                                  }).toList();
+                                  
+           _top10tv.shuffle();
+
                                   return ListView(
                                     scrollDirection: Axis.vertical,
                                     children: [
@@ -173,10 +183,10 @@ class Screenhome extends StatelessWidget {
                                             posterList:
                                                 _trending.sublist(0, 10),
                                           ),
-                                          Home_first_container(
+                                          Homesecond_widget(
                                             title:
                                                 'Top 10 Tv Shows in india Today',
-                                            posterList: [],
+                                            posterList: _top10tv.sublist(0, 10),
                                           ),
                                           Home_first_container(
                                             title: 'Tense Dramas',
@@ -339,8 +349,10 @@ class Homesecond_widget extends StatelessWidget {
   Homesecond_widget({
     Key? key,
     required this.title,
+    required this.posterList,
   }) : super(key: key);
   final String title;
+  final List<String> posterList;
 
   @override
   Widget build(BuildContext context) {
@@ -361,10 +373,10 @@ class Homesecond_widget extends StatelessWidget {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: List.generate(
-                10,
+                posterList.length,
                 (index) => Model_container(
                     imagelink:
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY2PJ9tbRYNPzrkiEhOocHXPtQfA3F3faaKQ&usqp=CAU',
+                       posterList[index],
                     index: index)),
           ),
         )
