@@ -33,6 +33,10 @@ class HotAndnewData {
   @JsonKey(name: 'original_title')
   String? originalTitle;
 
+//tv use orginal name
+  @JsonKey(name: 'original_name')
+  String? originalName;
+
   @JsonKey(name: 'overview')
   String? overview;
 

@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:netflixuis/newhot/hotandnewbloc/hotandnew_bloc.dart';
 import 'package:netflixuis/newhot/tabpage/cominsoontab.dart';
 import 'package:netflixuis/pages/conswidgets/constantelements.dart';
 
-everyonetab(BuildContext context) {
-  final Size screensize = MediaQuery.of(context).size;
-  final paddingsize = (screensize.width) - (screensize.width - 55);
-  return Container(
-    width: double.infinity,
-    height: double.infinity,
-    child: ListView.builder(
-        itemCount: 12,
-        itemBuilder: (BuildContext context, index) => SizedBox()),
-  );
-}
+import '../../pages/conswidgets/apiimageconsturl.dart';
+
+
 
 class Everyone_icon extends StatelessWidget {
   final IconData iconpath;
@@ -63,13 +58,17 @@ class Everyones_widget extends StatelessWidget {
         children: [
           sizedheight,
           Text(
-            'Friends',
+            
+          moviename,
             style: TextStyle(
                 color: constwhite, fontWeight: FontWeight.bold, fontSize: 19),
           ),
           sizedheight,
           Text(
-            'Ross Geller, Rachel Green, Monica Geller, Joey Tribbiani, Chandler Bing, and Phoebe Buffay are six twenty-somethings living in New York City. Over the course of 10 years and seasons, these friends go through life lessons, family, love, drama, friendship, and comedy.',
+          
+            description,
+            maxLines: 4,
+            overflow: TextOverflow.ellipsis,
             style: const TextStyle(
                 fontSize: 14, color: Colors.grey, fontWeight: FontWeight.bold),
           ),
@@ -79,11 +78,14 @@ class Everyones_widget extends StatelessWidget {
           Container(
             width: double.infinity,
             height: screensize.height * 0.23,
-            decoration: const BoxDecoration(
+            decoration:  BoxDecoration(
                 image: DecorationImage(
                     image: NetworkImage(
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZNE03n7FBY36SOI4ouDnpW_fXFiobt9mgaw&usqp=CAU'),
-                    fit: BoxFit.cover)),
+                      posterpath),
+                    fit: BoxFit.cover,
+                    
+                    )
+                    ),
             child: Stack(
               children: [
                 Positioned(
@@ -116,6 +118,59 @@ class Everyones_widget extends StatelessWidget {
             ],
           )
         ],
+      ),
+    );
+  }
+}
+
+class Everyoneslist extends StatelessWidget {
+  const Everyoneslist({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPersistentFrameCallback((_) {
+      BlocProvider.of<HotandnewBloc>(context)
+          .add(Loaddataineveryoneiswatching());
+    });
+    return RefreshIndicator(
+      onRefresh: () async{
+         BlocProvider.of<HotandnewBloc>(context)
+          .add(Loaddataineveryoneiswatching());
+      },
+      child: BlocBuilder<HotandnewBloc, HotandnewState>(
+        builder: (context, state) {
+          if (state.isloading) {
+            return Center(
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+              ),
+            );
+          } else if (state.iserror) {
+            return Center(
+              child: Text('Error while fetching Data...'),
+            );
+          } else if (state.everyoneswatchinglist.isEmpty) {
+            return Center(
+              child: Text('Comming soon list is empty'),
+            );
+          } else {
+            return ListView.builder(
+           
+                itemCount: state.everyoneswatchinglist.length,
+                itemBuilder: (BuildContext context, index) {
+                  final movie = state.everyoneswatchinglist[index];
+                  if (movie.id == null) {
+                    return SizedBox();
+                  }
+                 
+                  final tv = state.everyoneswatchinglist[index];
+                  return Everyones_widget(
+                      posterpath: '$imageappendurl${tv.posterPath}',
+                      moviename: tv.originalName??'No Name provided',
+                      description: tv.overview??'No Discription',);
+                });
+          }
+        },
       ),
     );
   }

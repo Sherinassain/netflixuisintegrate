@@ -2,17 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:netflixuis/home/screen_home.dart';
 import 'package:netflixuis/pages/conswidgets/constantelements.dart';
 
-// comingsoontab(BuildContext context) {
-//   final Size screensize = MediaQuery.of(context).size;
-//   final paddingsize = (screensize.width) - (screensize.width - 55);
-//   return Container(
-//     width: double.infinity,
-//     height: double.infinity,
-//     child: ListView.builder(
-//         itemCount: 12,
-//         itemBuilder: (BuildContext context, index) => Comingsoon_widget()),
-//   );
-// }
 
 class Comingsoon_icon extends StatelessWidget {
   final String iconpath;

@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflixuis/home/home_containers/Home_containers.dart';
+import 'package:netflixuis/home/homebloc/home_bloc.dart';
+import 'package:netflixuis/pages/conswidgets/apiimageconsturl.dart';
 import 'package:netflixuis/pages/conswidgets/constantelements.dart';
 import 'package:netflixuis/pages/conswidgets/playbutton.dart';
 
@@ -15,6 +19,9 @@ class Screenhome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      BlocProvider.of<HomeBloc>(context).add(GetHomescreendata());
+    });
     final Size screensize = MediaQuery.of(context).size;
     //ok
     //okk
@@ -43,103 +50,149 @@ class Screenhome extends StatelessWidget {
                           height: double.infinity,
                           child: Stack(
                             children: [
-                              ListView(
-                                scrollDirection: Axis.vertical,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Container(
-                                        width: double.infinity,
-                                        height: 500,
-                                        decoration: const BoxDecoration(
-                                            image: const DecorationImage(
-                                                image: const NetworkImage(
-                                                    'https://www.themoviedb.org/t/p/w500/pmAv14TPE2vKMIRrVeCd1Ll7K94.jpg'),
-                                                fit: BoxFit.cover)),
+                              BlocBuilder<HomeBloc, HomeState>(
+                                builder: (context, state) {
+                                  if (state.isloading) {
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
                                       ),
-                                      sizedheight,
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Homepic_icon(
-                                            icontitile: 'My List',
-                                            pictureicon: Icons.add,
-                                          ),
-                                          // Stack(
-                                          //   children: [
-                                          //     InkWell(
-                                          //       focusColor: Colors.grey,
-                                          //       onTap: () {
-                                          //         print('Button works');
-                                          //       },
-                                          //       child: Container(
-                                          //         width: screensize.width * 0.28,
-                                          //         height: screensize.width * 0.09,
-                                          //         decoration: BoxDecoration(
-                                          //             color: constwhite,
-                                          //             borderRadius: BorderRadius.circular(3)),
-                                          //         child: Row(
-                                          //           mainAxisAlignment: MainAxisAlignment.center,
-                                          //           children: [
-                                          //             SizedBox(
-                                          //               width: 5,
-                                          //             ),
-                                          //             Text(
-                                          //               'Play',
-                                          //               style: TextStyle(
-                                          //                   color: Colors.black,
-                                          //                   fontWeight: FontWeight.bold,
-                                          //                   fontSize: 17),
-                                          //             ),
-                                          //           ],
-                                          //         ),
-                                          //       ),
-                                          //     ),
-                                          //     Positioned(
-                                          //         bottom: 1,
-                                          //         left: 5,
-                                          //         child: Icon(
-                                          //           Icons.play_arrow,
-                                          //           color: Colors.black,
-                                          //           size: 35,
-                                          //         )),
-                                          //   ],
-                                          // ),
-                                          //---------------
-                                          //play Button
+                                    );
+                                  } else if (state.iserror) {
+                                    return Center(
+                                        child: Text(
+                                      'Error while getting Data',
+                                      style: TextStyle(color: Colors.white),
+                                    ));
+                                  }
+//released pastyear
+                                  final _releasespastyear =
+                                      state.trendingmovielist.map((m) {
+                                    return '$imageappendurl${m.posterPath}';
+                                  }).toList();
+                                  //trending
+                                  final _trending =
+                                      state.pastyearmovielist.map((m) {
+                                    return '$imageappendurl${m.posterPath}';
+                                  }).toList();
 
-                                          const Play_button(),
-                                          Homepic_icon(
-                                            icontitile: 'info',
-                                            pictureicon: Icons.info_rounded,
-                                          )
+//tense dramas
+
+                                  final _tensedramas =
+                                      state.tenseDreamsmovielist.map((m) {
+                                    return '$imageappendurl${m.posterPath}';
+                                  }).toList();
+//south indian movielist
+                                  final _southindian =
+                                      state.southindianmovielist.map((m) {
+                                    return '$imageappendurl${m.posterPath}';
+                                  }).toList();
+                                  _southindian.shuffle();
+                                  return ListView(
+                                    scrollDirection: Axis.vertical,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Container(
+                                            width: double.infinity,
+                                            height: 500,
+                                            decoration: const BoxDecoration(
+                                                image: const DecorationImage(
+                                                    image: const NetworkImage(
+                                                        'https://www.themoviedb.org/t/p/w500/pmAv14TPE2vKMIRrVeCd1Ll7K94.jpg'),
+                                                    fit: BoxFit.cover)),
+                                          ),
+                                          sizedheight,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Homepic_icon(
+                                                icontitile: 'My List',
+                                                pictureicon: Icons.add,
+                                              ),
+                                              // Stack(
+                                              //   children: [
+                                              //     InkWell(
+                                              //       focusColor: Colors.grey,
+                                              //       onTap: () {
+                                              //         print('Button works');
+                                              //       },
+                                              //       child: Container(
+                                              //         width: screensize.width * 0.28,
+                                              //         height: screensize.width * 0.09,
+                                              //         decoration: BoxDecoration(
+                                              //             color: constwhite,
+                                              //             borderRadius: BorderRadius.circular(3)),
+                                              //         child: Row(
+                                              //           mainAxisAlignment: MainAxisAlignment.center,
+                                              //           children: [
+                                              //             SizedBox(
+                                              //               width: 5,
+                                              //             ),
+                                              //             Text(
+                                              //               'Play',
+                                              //               style: TextStyle(
+                                              //                   color: Colors.black,
+                                              //                   fontWeight: FontWeight.bold,
+                                              //                   fontSize: 17),
+                                              //             ),
+                                              //           ],
+                                              //         ),
+                                              //       ),
+                                              //     ),
+                                              //     Positioned(
+                                              //         bottom: 1,
+                                              //         left: 5,
+                                              //         child: Icon(
+                                              //           Icons.play_arrow,
+                                              //           color: Colors.black,
+                                              //           size: 35,
+                                              //         )),
+                                              //   ],
+                                              // ),
+                                              //---------------
+                                              //play Button
+
+                                              const Play_button(),
+                                              Homepic_icon(
+                                                icontitile: 'info',
+                                                pictureicon: Icons.info_rounded,
+                                              )
+                                            ],
+                                          ),
+                                          sizedheight,
+                                          Home_first_container(
+                                            title: 'Released in the past year',
+                                            posterList: _releasespastyear
+                                                .sublist(0, 10),
+                                          ),
+                                          sizedheight,
+                                          Home_first_container(
+                                            title: 'Trending Now',
+                                            posterList:
+                                                _trending.sublist(0, 10),
+                                          ),
+                                          Home_first_container(
+                                            title:
+                                                'Top 10 Tv Shows in india Today',
+                                            posterList: [],
+                                          ),
+                                          Home_first_container(
+                                            title: 'Tense Dramas',
+                                            posterList:
+                                                _tensedramas.sublist(0, 10),
+                                          ),
+                                          Home_first_container(
+                                            title: 'South indian Cinema',
+                                            posterList:
+                                                _southindian.sublist(0, 10),
+                                          ),
                                         ],
                                       ),
-                                      sizedheight,
-                                      Homefirst_widget(
-                                          title: 'Released in the past year',
-                                          imagelink:
-                                              'https://pbs.twimg.com/media/FY3Jpd8akAA31tL?format=jpg&name=900x900'),
-                                      sizedheight,
-                                      Homefirst_widget(
-                                          title: 'Trending Now',
-                                          imagelink:
-                                              'https://www.kerala9.com/wp-content/uploads/2022/07/Pappan-Movie-Stills-007.jpg'),
-                                      Homesecond_widget(
-                                          title:
-                                              'Top 10 Tv Shows in india Today'),
-                                      Homefirst_widget(
-                                          title: 'Tense Dramas',
-                                          imagelink:
-                                              'https://moviegalleri.net/wp-content/uploads/2020/12/Sesh-Adivi-Major-Movie-Hindi-first-look-poster-HD.jpg'),
-                                      Homefirst_widget(
-                                          title: 'South indian Cinema',
-                                          imagelink:
-                                              'https://m.media-amazon.com/images/M/MV5BYmRjOWQ4NDctYzAxZC00NGZhLThmMTctYmVhNjI2YTU4NTc3XkEyXkFqcGdeQXVyMjkxNzQ1NDI@._V1_.jpg'),
                                     ],
-                                  ),
-                                ],
+                                  );
+                                },
                               ),
                               scrollnotifier.value == true
                                   ? AnimatedContainer(
@@ -232,11 +285,15 @@ class Screenhome extends StatelessWidget {
   }
 }
 
-class Homefirst_widget extends StatelessWidget {
-  Homefirst_widget({Key? key, required this.title, required this.imagelink})
-      : super(key: key);
+class Home_first_container extends StatelessWidget {
+  Home_first_container({
+    Key? key,
+    required this.title,
+    required this.posterList,
+  }) : super(key: key);
   final String title;
-  final String imagelink;
+
+  final List<String> posterList;
 
   @override
   Widget build(BuildContext context) {
@@ -256,7 +313,7 @@ class Homefirst_widget extends StatelessWidget {
           height: screensize.height * 0.26,
           child: ListView(
             scrollDirection: Axis.horizontal,
-            children: List.generate(10, (index) {
+            children: List.generate(posterList.length, (index) {
               return Padding(
                 padding: const EdgeInsets.all(6),
                 child: Container(
@@ -264,7 +321,7 @@ class Homefirst_widget extends StatelessWidget {
                   width: screensize.width * 0.33,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage(imagelink),
+                        image: NetworkImage(posterList[index]),
                         fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.circular(8)),

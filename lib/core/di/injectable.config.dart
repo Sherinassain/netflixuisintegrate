@@ -11,14 +11,15 @@ import 'package:injectable/injectable.dart' as _i2;
 import '../../dbloc/downloads/downloads_bloc.dart' as _i9;
 import '../../Downloads/model/download_repo.dart' as _i7;
 import '../../fastlaugh/fastlaugh/fast_laugh_bloc.dart' as _i10;
+import '../../home/homebloc/home_bloc.dart' as _i11;
 import '../../infrastracture/downloadapi_repository.dart' as _i8;
-import '../../newhot/hotandnewbloc/hotandnew_bloc.dart' as _i11;
+import '../../newhot/hotandnewbloc/hotandnew_bloc.dart' as _i12;
 import '../../newhot/model/hot_and_new_repository.dart' as _i4;
 import '../../newhot/model/new_and_hot_repo.dart' as _i3;
 import '../../Search/model/iSearch_repo.dart' as _i5;
 import '../../Search/model/Search_repository.dart' as _i6;
 import '../../Search/searchbloc/search_bloc.dart'
-    as _i12; // ignore_for_file: unnecessary_lambdas
+    as _i13; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -39,9 +40,10 @@ _i1.GetIt $initGetIt(
       () => _i9.DownloadsBloc(get<_i7.downloadrepo>()));
   gh.factory<_i10.FastLaughBloc>(
       () => _i10.FastLaughBloc(get<_i7.downloadrepo>()));
-  gh.factory<_i11.HotandnewBloc>(
-      () => _i11.HotandnewBloc(get<_i3.Hotandnewrepo>()));
-  gh.factory<_i12.SearchBloc>(() => _i12.SearchBloc(
+  gh.factory<_i11.HomeBloc>(() => _i11.HomeBloc(get<_i3.Hotandnewrepo>()));
+  gh.factory<_i12.HotandnewBloc>(
+      () => _i12.HotandnewBloc(get<_i3.Hotandnewrepo>()));
+  gh.factory<_i13.SearchBloc>(() => _i13.SearchBloc(
         get<_i7.downloadrepo>(),
         get<_i5.Searchrepo>(),
       ));

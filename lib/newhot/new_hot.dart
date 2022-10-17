@@ -68,7 +68,7 @@ class Screennewandhot extends StatelessWidget {
             CommingsoonList(
               key: Key('Comming soon'),
             ),
-            everyonetab(context),
+           Everyoneslist(key: Key('Every_ones_watching'),),
           ])),
     );
   }
@@ -87,57 +87,63 @@ class CommingsoonList extends StatelessWidget {
     WidgetsBinding.instance.addPersistentFrameCallback((_) {
       BlocProvider.of<HotandnewBloc>(context).add(Loaddataincommingsoon());
     });
-    return BlocBuilder<HotandnewBloc, HotandnewState>(
-      builder: (context, state) {
-        if (state.isloading) {
-          return Center(
-            child: CircularProgressIndicator(
-              strokeWidth: 2,
-            ),
-          );
-        } else if (state.iserror) {
-          return Center(
-            child: Text('Error while fetching Data...'),
-          );
-        } else if (state.commingsoonlist.isEmpty) {
-          return Center(
-            child: Text('Comming soon list is empty'),
-          );
-        } else {
-          return ListView.builder(
-              itemCount: state.commingsoonlist.length,
-              itemBuilder: (BuildContext context, index) {
-                final movie = state.commingsoonlist[index];
-                if (movie.id == null) {
-                  return SizedBox();
-                }
-                String month = '';
-                String dates = '';
-                try {
-                  final _date = DateTime.tryParse(movie.releaseDate!);
-                  final formatteddate =
-                      DateFormat.yMMMd('en_US').format(_date!);
-                  month = formatteddate
-                      .split(' ')
-                      .first
-                      .substring(0, 3)
-                      .toUpperCase();
-                  dates = movie.releaseDate!.split('-')[1];
-                } catch (_) {
-                  month = '';
-                  dates = '';
-                }
-
-                return Comingsoon_widget(
-                    id: movie.id.toString(),
-                    month: month,
-                    day: dates,
-                    posterpath: '$imageappendurl${movie.posterPath}',
-                    moviename: movie.originalTitle ?? 'No title',
-                    description: movie.overview ?? 'No Discription');
-              });
-        }
+    return RefreshIndicator(
+      onRefresh: () async{
+         BlocProvider.of<HotandnewBloc>(context).add(Loaddataincommingsoon());
       },
+      child: BlocBuilder<HotandnewBloc, HotandnewState>(
+        builder: (context, state) {
+          if (state.isloading) {
+            return Center(
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+              ),
+            );
+          } else if (state.iserror) {
+            return Center(
+              child: Text('Error while fetching Data...'),
+            );
+          } else if (state.commingsoonlist.isEmpty) {
+            return Center(
+              child: Text('Comming soon list is empty'),
+            );
+          } else {
+            return ListView.builder(
+             
+                itemCount: state.commingsoonlist.length,
+                itemBuilder: (BuildContext context, index) {
+                  final movie = state.commingsoonlist[index];
+                  if (movie.id == null) {
+                    return SizedBox();
+                  }
+                  String month = '';
+                  String dates = '';
+                  try {
+                    final _date = DateTime.tryParse(movie.releaseDate!);
+                    final formatteddate =
+                        DateFormat.yMMMd('en_US').format(_date!);
+                    month = formatteddate
+                        .split(' ')
+                        .first
+                        .substring(0, 3)
+                        .toUpperCase();
+                    dates = movie.releaseDate!.split('-')[1];
+                  } catch (_) {
+                    month = '';
+                    dates = '';
+                  }
+    
+                  return Comingsoon_widget(
+                      id: movie.id.toString(),
+                      month: month,
+                      day: dates,
+                      posterpath: '$imageappendurl${movie.posterPath}',
+                      moviename: movie.originalTitle ?? 'No title',
+                      description: movie.overview ?? 'No Discription');
+                });
+          }
+        },
+      ),
     );
   }
 }

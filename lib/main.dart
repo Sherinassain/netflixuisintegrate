@@ -7,6 +7,7 @@ import 'package:netflixuis/widgets/home_page.dart';
 import 'package:netflixuis/widgets/colors.dart';
 
 import 'fastlaugh/fastlaugh/fast_laugh_bloc.dart';
+import 'home/homebloc/home_bloc.dart';
 import 'newhot/hotandnewbloc/hotandnew_bloc.dart';
 
 Future<void> main() async {
@@ -26,6 +27,7 @@ class Myapp extends StatelessWidget {
         BlocProvider(create: (ctx) => getit<SearchBloc>()),
         BlocProvider(create: (ctx) => getit<FastLaughBloc>()),
          BlocProvider(create: (ctx) => getit<HotandnewBloc>()),
+           BlocProvider(create: (ctx) => getit<HomeBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
