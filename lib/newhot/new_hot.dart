@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:netflixuis/newhot/tabpage/cominsoontab.dart';
 import 'package:netflixuis/newhot/tabpage/everyonetab.dart';
+import 'package:netflixuis/pages/conswidgets/apiimageconsturl.dart';
 import 'package:netflixuis/pages/conswidgets/appbars.dart';
 
 import '../pages/conswidgets/constantelements.dart';
+import 'hotandnewbloc/hotandnew_bloc.dart';
 
 class Screennewandhot extends StatelessWidget {
   const Screennewandhot({Key? key}) : super(key: key);
@@ -61,7 +65,9 @@ class Screennewandhot extends StatelessWidget {
           ),
           backgroundColor: Colors.black,
           body: TabBarView(children: [
-            comingsoontab(context),
+            CommingsoonList(
+              key: Key('Comming soon'),
+            ),
             everyonetab(context),
           ])),
     );
@@ -71,4 +77,67 @@ class Screennewandhot extends StatelessWidget {
   //   return Center(child: Text('$name'));
   // }
 
+}
+
+class CommingsoonList extends StatelessWidget {
+  const CommingsoonList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPersistentFrameCallback((_) {
+      BlocProvider.of<HotandnewBloc>(context).add(Loaddataincommingsoon());
+    });
+    return BlocBuilder<HotandnewBloc, HotandnewState>(
+      builder: (context, state) {
+        if (state.isloading) {
+          return Center(
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+            ),
+          );
+        } else if (state.iserror) {
+          return Center(
+            child: Text('Error while fetching Data...'),
+          );
+        } else if (state.commingsoonlist.isEmpty) {
+          return Center(
+            child: Text('Comming soon list is empty'),
+          );
+        } else {
+          return ListView.builder(
+              itemCount: state.commingsoonlist.length,
+              itemBuilder: (BuildContext context, index) {
+                final movie = state.commingsoonlist[index];
+                if (movie.id == null) {
+                  return SizedBox();
+                }
+                String month = '';
+                String dates = '';
+                try {
+                  final _date = DateTime.tryParse(movie.releaseDate!);
+                  final formatteddate =
+                      DateFormat.yMMMd('en_US').format(_date!);
+                  month = formatteddate
+                      .split(' ')
+                      .first
+                      .substring(0, 3)
+                      .toUpperCase();
+                  dates = movie.releaseDate!.split('-')[1];
+                } catch (_) {
+                  month = '';
+                  dates = '';
+                }
+
+                return Comingsoon_widget(
+                    id: movie.id.toString(),
+                    month: month,
+                    day: dates,
+                    posterpath: '$imageappendurl${movie.posterPath}',
+                    moviename: movie.originalTitle ?? 'No title',
+                    description: movie.overview ?? 'No Discription');
+              });
+        }
+      },
+    );
+  }
 }

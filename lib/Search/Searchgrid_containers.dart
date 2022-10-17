@@ -4,10 +4,11 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class Search_Containers extends StatelessWidget {
   final String searchimagepath;
- 
 
-  Search_Containers({Key? key, required this.searchimagepath,})
-      : super(key: key);
+  Search_Containers({
+    Key? key,
+    required this.searchimagepath,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,6 @@ class Search_Containers extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(7)),
-         
       ),
     );
   }

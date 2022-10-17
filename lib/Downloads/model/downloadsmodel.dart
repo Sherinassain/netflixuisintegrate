@@ -6,7 +6,7 @@ part 'downloadsmodel.g.dart';
 class Downloadmodel with _$Downloadmodel {
   const factory Downloadmodel({
     @JsonKey(name: "poster_path") required String? posterpath,
-        @JsonKey(name: "title") required String? title,
+    @JsonKey(name: "title") required String? title,
   }) = _Downloadmodel;
 
   factory Downloadmodel.fromJson(Map<String, dynamic> json) =>

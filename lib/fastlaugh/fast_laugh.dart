@@ -40,8 +40,7 @@ class Screenfastlaugh extends StatelessWidget {
                   // return Fastlaugh_container(index: index);
                   return Videolistlteminheritedwidget(
                       widget: Fastlaugh_container(
-                        key: Key(index.toString()),
-                        index: index),
+                          key: Key(index.toString()), index: index),
                       moviedata: state.videoslist[index]);
                 }),
               );

@@ -28,7 +28,6 @@ class SearchresultData {
   @JsonKey(name: 'poster_path')
   String? posterPath;
 
-
   SearchresultData({
     this.id,
     this.originalTitle,

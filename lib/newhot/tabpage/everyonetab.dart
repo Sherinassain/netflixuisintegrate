@@ -10,7 +10,7 @@ everyonetab(BuildContext context) {
     height: double.infinity,
     child: ListView.builder(
         itemCount: 12,
-        itemBuilder: (BuildContext context, index) => Everyones_widget()),
+        itemBuilder: (BuildContext context, index) => SizedBox()),
   );
 }
 
@@ -40,7 +40,15 @@ class Everyone_icon extends StatelessWidget {
 }
 
 class Everyones_widget extends StatelessWidget {
-  const Everyones_widget({Key? key}) : super(key: key);
+  final String posterpath;
+  final String moviename;
+  final String description;
+  const Everyones_widget(
+      {Key? key,
+      required this.posterpath,
+      required this.moviename,
+      required this.description})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

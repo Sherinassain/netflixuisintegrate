@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:netflixuis/home/screen_home.dart';
 import 'package:netflixuis/pages/conswidgets/constantelements.dart';
 
-comingsoontab(BuildContext context) {
-  final Size screensize = MediaQuery.of(context).size;
-  final paddingsize = (screensize.width) - (screensize.width - 55);
-  return Container(
-    width: double.infinity,
-    height: double.infinity,
-    child: ListView.builder(
-        itemCount: 12,
-        itemBuilder: (BuildContext context, index) => Comingsoon_widget()),
-  );
-}
+// comingsoontab(BuildContext context) {
+//   final Size screensize = MediaQuery.of(context).size;
+//   final paddingsize = (screensize.width) - (screensize.width - 55);
+//   return Container(
+//     width: double.infinity,
+//     height: double.infinity,
+//     child: ListView.builder(
+//         itemCount: 12,
+//         itemBuilder: (BuildContext context, index) => Comingsoon_widget()),
+//   );
+// }
 
 class Comingsoon_icon extends StatelessWidget {
   final String iconpath;
@@ -40,7 +40,22 @@ class Comingsoon_icon extends StatelessWidget {
 }
 
 class Comingsoon_widget extends StatelessWidget {
-  const Comingsoon_widget({Key? key}) : super(key: key);
+  final String id;
+  final String month;
+  final String day;
+  final String posterpath;
+  final String moviename;
+  final String description;
+
+  const Comingsoon_widget(
+      {Key? key,
+      required this.id,
+      required this.month,
+      required this.day,
+      required this.posterpath,
+      required this.moviename,
+      required this.description})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -62,16 +77,16 @@ class Comingsoon_widget extends StatelessWidget {
                 decoration: const BoxDecoration(color: Colors.transparent),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
+                  children:  [
                     Text(
-                      'FEB',
+                      month,
                       style: TextStyle(
                           color: Colors.grey,
                           fontWeight: FontWeight.bold,
                           fontSize: 16),
                     ),
                     Text(
-                      '11',
+                      day,
                       style: TextStyle(
                           color: constwhite,
                           fontWeight: FontWeight.bold,
@@ -83,10 +98,10 @@ class Comingsoon_widget extends StatelessWidget {
               Container(
                 width: screensize.width - 55,
                 height: screensize.height * 0.23,
-                decoration: const BoxDecoration(
+                decoration:  BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtZcfZPC841S5PuemLiE2ZifG2I7j5tZOMZw&usqp=CAU'),
+                           posterpath),
                         fit: BoxFit.cover)),
                 child: Stack(
                   children: [
@@ -121,8 +136,8 @@ class Comingsoon_widget extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(top: screensize.width * 0.02),
-                      child: const Text(
-                        'TALL GIRL 2',
+                      child:  Text(
+                        moviename,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: constwhite,
@@ -150,7 +165,7 @@ class Comingsoon_widget extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  'Coming on Friday',
+                  'Coming on $day $month',
                   style: const TextStyle(
                       fontSize: 12,
                       color: Colors.grey,
@@ -160,7 +175,7 @@ class Comingsoon_widget extends StatelessWidget {
                   height: screensize.width * 0.07,
                 ),
                 Text(
-                  'Tall Girl 2',
+                  moviename,
                   style: TextStyle(
                       color: constwhite,
                       fontWeight: FontWeight.bold,
@@ -168,7 +183,7 @@ class Comingsoon_widget extends StatelessWidget {
                 ),
                 sizedheight,
                 Text(
-                  'The relationship between Jodi and Dunkleman begins on a lovely note, with the two sharing romantic moments. Jodi has become one of the popular kids at school as a result of her speech at the Homecoming dance, who high-fives other students instead of staring down the hallways.',
+                 description,
                   style: const TextStyle(
                       fontSize: 14,
                       color: Colors.grey,

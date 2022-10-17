@@ -39,10 +39,14 @@ class Searchresult_page extends StatelessWidget {
                         childAspectRatio: 1 / 2,
                         shrinkWrap: true,
                         crossAxisCount: 3,
-                        children: List.generate(state.searchresultlist.length, (index) {
+                        children: List.generate(state.searchresultlist.length,
+                            (index) {
                           final movie = state.searchresultlist[index];
-   
-                          return Search_Containers(searchimagepath:'$imageappendurl${movie.posterPath}',);
+
+                          return Search_Containers(
+                            searchimagepath:
+                                '$imageappendurl${movie.posterPath}',
+                          );
                         }),
                       );
                     },
