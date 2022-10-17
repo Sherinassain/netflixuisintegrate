@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:netflixuis/home/home_containers/Home_containers.dart';
+
 import 'package:netflixuis/home/homebloc/home_bloc.dart';
 import 'package:netflixuis/pages/conswidgets/apiimageconsturl.dart';
 import 'package:netflixuis/pages/conswidgets/constantelements.dart';
