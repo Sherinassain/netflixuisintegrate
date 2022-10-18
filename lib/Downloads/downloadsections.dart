@@ -83,7 +83,7 @@ class Section2 extends StatelessWidget {
                         //image container
                         Image_container(
                           imageindexnumber:
-                              '$imageappendurl${state.downloads[3].posterpath}',
+                              '$imageappendurl${state.downloads[0].posterpath}',
                           imagewidth: 0.35,
                           imageheight: 0.24,
                           imageangle: -23,

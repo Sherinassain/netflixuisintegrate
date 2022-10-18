@@ -196,10 +196,14 @@ class Screenhome extends StatelessWidget {
                                                     Container(
                                                       height: 30,
                                                       width: 30,
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                              color:
-                                                                  Colors.blue),
+                                                      decoration: const BoxDecoration(
+                                                          color: Colors
+                                                              .transparent,
+                                                          image: DecorationImage(
+                                                              image: AssetImage(
+                                                                  'assets/smile.png'),
+                                                              fit: BoxFit
+                                                                  .cover)),
                                                     )
                                                   ],
                                                 ),

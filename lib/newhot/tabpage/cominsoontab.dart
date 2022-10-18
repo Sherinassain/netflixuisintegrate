@@ -5,7 +5,6 @@ import 'package:netflixuis/pages/conswidgets/constantelements.dart';
 
 import '../hotandnewbloc/hotandnew_bloc.dart';
 
-
 class Comingsoon_icon extends StatelessWidget {
   final String iconpath;
   final String icontitle;
@@ -51,7 +50,6 @@ class Comingsoon_widget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      
     final Size screensize = MediaQuery.of(context).size;
     final paddingsize = (screensize.width) - (screensize.width - 55);
     return Container(
@@ -70,7 +68,7 @@ class Comingsoon_widget extends StatelessWidget {
                 decoration: const BoxDecoration(color: Colors.transparent),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children:  [
+                  children: [
                     Text(
                       month,
                       style: TextStyle(
@@ -91,11 +89,9 @@ class Comingsoon_widget extends StatelessWidget {
               Container(
                 width: screensize.width - 55,
                 height: screensize.height * 0.23,
-                decoration:  BoxDecoration(
+                decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(
-                           posterpath),
-                        fit: BoxFit.cover)),
+                        image: NetworkImage(posterpath), fit: BoxFit.cover)),
                 child: Stack(
                   children: [
                     Positioned(
@@ -129,14 +125,14 @@ class Comingsoon_widget extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(top: screensize.width * 0.02),
-                      child:  Text(
+                      child: Text(
                         moviename,
-                        maxLines: 2,
+                        maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: constwhite,
-                            fontSize: 30),
+                            fontSize: 20),
                       ),
                     ),
                     Padding(
@@ -171,18 +167,18 @@ class Comingsoon_widget extends StatelessWidget {
                 ),
                 Text(
                   moviename,
-                   maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                       color: constwhite,
                       fontWeight: FontWeight.bold,
-                      fontSize: 17),
+                      fontSize: 15),
                 ),
                 sizedheight,
                 Text(
-                 description,
+                  description,
                   maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                       fontSize: 14,
                       color: Colors.grey,

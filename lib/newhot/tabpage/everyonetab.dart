@@ -7,8 +7,6 @@ import 'package:netflixuis/pages/conswidgets/constantelements.dart';
 
 import '../../pages/conswidgets/apiimageconsturl.dart';
 
-
-
 class Everyone_icon extends StatelessWidget {
   final IconData iconpath;
   final String icontitle;
@@ -58,14 +56,12 @@ class Everyones_widget extends StatelessWidget {
         children: [
           sizedheight,
           Text(
-            
-          moviename,
+            moviename,
             style: TextStyle(
                 color: constwhite, fontWeight: FontWeight.bold, fontSize: 19),
           ),
           sizedheight,
           Text(
-          
             description,
             maxLines: 4,
             overflow: TextOverflow.ellipsis,
@@ -78,14 +74,11 @@ class Everyones_widget extends StatelessWidget {
           Container(
             width: double.infinity,
             height: screensize.height * 0.23,
-            decoration:  BoxDecoration(
+            decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage(
-                      posterpath),
-                    fit: BoxFit.cover,
-                    
-                    )
-                    ),
+              image: NetworkImage(posterpath),
+              fit: BoxFit.cover,
+            )),
             child: Stack(
               children: [
                 Positioned(
@@ -128,11 +121,10 @@ class Everyoneslist extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return RefreshIndicator(
-      onRefresh: () async{
-         BlocProvider.of<HotandnewBloc>(context)
-          .add(Loaddataineveryoneiswatching());
+      onRefresh: () async {
+        BlocProvider.of<HotandnewBloc>(context)
+            .add(Loaddataineveryoneiswatching());
       },
       child: BlocBuilder<HotandnewBloc, HotandnewState>(
         builder: (context, state) {
@@ -152,19 +144,19 @@ class Everyoneslist extends StatelessWidget {
             );
           } else {
             return ListView.builder(
-           
                 itemCount: state.everyoneswatchinglist.length,
                 itemBuilder: (BuildContext context, index) {
                   final movie = state.everyoneswatchinglist[index];
                   if (movie.id == null) {
                     return SizedBox();
                   }
-                 
+
                   final tv = state.everyoneswatchinglist[index];
                   return Everyones_widget(
-                      posterpath: '$imageappendurl${tv.posterPath}',
-                      moviename: tv.originalName??'No Name provided',
-                      description: tv.overview??'No Discription',);
+                    posterpath: '$imageappendurl${tv.posterPath}',
+                    moviename: tv.originalName ?? 'No Name provided',
+                    description: tv.overview ?? 'No Discription',
+                  );
                 });
           }
         },

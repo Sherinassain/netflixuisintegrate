@@ -12,17 +12,20 @@ import 'package:netflixuis/pages/conswidgets/appbars.dart';
 import '../pages/conswidgets/constantelements.dart';
 import 'hotandnewbloc/hotandnew_bloc.dart';
 
-class Screennewandhot extends StatelessWidget {
-   Screennewandhot({Key? key}) : super(key: key);
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+class Screennewandhot extends StatelessWidget {
+  Screennewandhot({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext  context) {
     //ok
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-     
+          key: _scaffoldKey,
+
+
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(90),
             child: AppBar(
@@ -70,7 +73,9 @@ class Screennewandhot extends StatelessWidget {
             CommingsoonList(
               key: Key('Comming soon'),
             ),
-           Everyoneslist(key: Key('Every_ones_watching'),),
+            Everyoneslist(
+              key: Key('Every_ones_watching'),
+            ),
           ])),
     );
   }
@@ -90,8 +95,8 @@ class CommingsoonList extends StatelessWidget {
       BlocProvider.of<HotandnewBloc>(context).add(Loaddataincommingsoon());
     });
     return RefreshIndicator(
-      onRefresh: () async{
-         BlocProvider.of<HotandnewBloc>(context).add(Loaddataincommingsoon());
+      onRefresh: () async {
+        BlocProvider.of<HotandnewBloc>(context).add(Loaddataincommingsoon());
       },
       child: BlocBuilder<HotandnewBloc, HotandnewState>(
         builder: (context, state) {
@@ -111,7 +116,6 @@ class CommingsoonList extends StatelessWidget {
             );
           } else {
             return ListView.builder(
-             
                 itemCount: state.commingsoonlist.length,
                 itemBuilder: (BuildContext context, index) {
                   final movie = state.commingsoonlist[index];
@@ -134,7 +138,7 @@ class CommingsoonList extends StatelessWidget {
                     month = '';
                     dates = '';
                   }
-    
+
                   return Comingsoon_widget(
                       id: movie.id.toString(),
                       month: month,

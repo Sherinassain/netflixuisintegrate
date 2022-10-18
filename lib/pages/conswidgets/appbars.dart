@@ -34,7 +34,11 @@ class Appbars extends StatelessWidget {
                 Container(
                   height: 30,
                   width: 30,
-                  decoration: BoxDecoration(color: Colors.blue),
+                  decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      image: DecorationImage(
+                          image: AssetImage('assets/smile.png'),
+                          fit: BoxFit.cover)),
                 )
               ],
             ),
