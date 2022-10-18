@@ -18,14 +18,12 @@ class Screennewandhot extends StatelessWidget {
   Screennewandhot({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext  context) {
+  Widget build(BuildContext context) {
     //ok
     return DefaultTabController(
       length: 2,
       child: Scaffold(
           key: _scaffoldKey,
-
-
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(90),
             child: AppBar(
@@ -45,7 +43,11 @@ class Screennewandhot extends StatelessWidget {
                 Container(
                   height: 30,
                   width: 30,
-                  decoration: BoxDecoration(color: Colors.blue),
+                  decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      image: DecorationImage(
+                        image: AssetImage('assets/smile.png'),
+                      )),
                 )
               ],
               bottom: TabBar(
