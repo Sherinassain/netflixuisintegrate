@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netflixuis/home/screen_home.dart';
 import 'package:netflixuis/pages/conswidgets/constantelements.dart';
+
+import '../hotandnewbloc/hotandnew_bloc.dart';
 
 
 class Comingsoon_icon extends StatelessWidget {
@@ -48,6 +51,7 @@ class Comingsoon_widget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      
     final Size screensize = MediaQuery.of(context).size;
     final paddingsize = (screensize.width) - (screensize.width - 55);
     return Container(
@@ -127,6 +131,8 @@ class Comingsoon_widget extends StatelessWidget {
                       padding: EdgeInsets.only(top: screensize.width * 0.02),
                       child:  Text(
                         moviename,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: constwhite,
@@ -165,6 +171,8 @@ class Comingsoon_widget extends StatelessWidget {
                 ),
                 Text(
                   moviename,
+                   maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                       color: constwhite,
                       fontWeight: FontWeight.bold,
@@ -173,6 +181,8 @@ class Comingsoon_widget extends StatelessWidget {
                 sizedheight,
                 Text(
                  description,
+                  maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                       fontSize: 14,
                       color: Colors.grey,

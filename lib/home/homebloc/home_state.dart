@@ -12,7 +12,7 @@ class HomeState with _$HomeState {
     required bool isloading,
     required bool iserror,
   }) = _Initial;
-  factory HomeState.initial() => HomeState(
+  factory HomeState.initial() => const HomeState(
     stateid: '0',
       pastyearmovielist: [],
       trendingmovielist: [],

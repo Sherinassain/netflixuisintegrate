@@ -11,6 +11,7 @@ import 'package:netflixuis/pages/conswidgets/constantelements.dart';
 import 'package:netflixuis/pages/conswidgets/playbutton.dart';
 
 ValueNotifier<bool> scrollnotifier = ValueNotifier(true);
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class Screenhome extends StatelessWidget {
   const Screenhome({
@@ -26,6 +27,7 @@ class Screenhome extends StatelessWidget {
     //ok
     //okk
     return Scaffold(
+        key: _scaffoldKey,
         backgroundColor: Colors.black,
         body: SafeArea(
             child: ValueListenableBuilder(
@@ -65,7 +67,6 @@ class Screenhome extends StatelessWidget {
                                       style: TextStyle(color: Colors.white),
                                     ));
                                   }
-//released pastyear
                                   final _releasespastyear =
                                       state.trendingmovielist.map((m) {
                                     return '$imageappendurl${m.posterPath}';
@@ -91,12 +92,12 @@ class Screenhome extends StatelessWidget {
 
                                   //top10 tv shows
 
-                                    final _top10tv =
+                                  final _top10tv =
                                       state.trendingtvlist.map((t) {
                                     return '$imageappendurl${t.posterPath}';
                                   }).toList();
-                                  
-           _top10tv.shuffle();
+
+                                  _top10tv.shuffle();
 
                                   return ListView(
                                     scrollDirection: Axis.vertical,
@@ -121,49 +122,6 @@ class Screenhome extends StatelessWidget {
                                                 icontitile: 'My List',
                                                 pictureicon: Icons.add,
                                               ),
-                                              // Stack(
-                                              //   children: [
-                                              //     InkWell(
-                                              //       focusColor: Colors.grey,
-                                              //       onTap: () {
-                                              //         print('Button works');
-                                              //       },
-                                              //       child: Container(
-                                              //         width: screensize.width * 0.28,
-                                              //         height: screensize.width * 0.09,
-                                              //         decoration: BoxDecoration(
-                                              //             color: constwhite,
-                                              //             borderRadius: BorderRadius.circular(3)),
-                                              //         child: Row(
-                                              //           mainAxisAlignment: MainAxisAlignment.center,
-                                              //           children: [
-                                              //             SizedBox(
-                                              //               width: 5,
-                                              //             ),
-                                              //             Text(
-                                              //               'Play',
-                                              //               style: TextStyle(
-                                              //                   color: Colors.black,
-                                              //                   fontWeight: FontWeight.bold,
-                                              //                   fontSize: 17),
-                                              //             ),
-                                              //           ],
-                                              //         ),
-                                              //       ),
-                                              //     ),
-                                              //     Positioned(
-                                              //         bottom: 1,
-                                              //         left: 5,
-                                              //         child: Icon(
-                                              //           Icons.play_arrow,
-                                              //           color: Colors.black,
-                                              //           size: 35,
-                                              //         )),
-                                              //   ],
-                                              // ),
-                                              //---------------
-                                              //play Button
-
                                               const Play_button(),
                                               Homepic_icon(
                                                 icontitile: 'info',
@@ -173,35 +131,29 @@ class Screenhome extends StatelessWidget {
                                           ),
                                           sizedheight,
                                           Home_first_container(
-                                            title: 'Released in the past year',
-                                            posterList: _releasespastyear
-                                                .sublist(0, 10),
-                                          ),
+                                              title:
+                                                  'Released in the past year',
+                                              posterList: _releasespastyear),
                                           sizedheight,
                                           Home_first_container(
-                                            title: 'Trending Now',
-                                            posterList:
-                                                _trending.sublist(0, 10),
-                                          ),
+                                              title: 'Trending Now',
+                                              posterList: _trending),
                                           Homesecond_widget(
-                                            title:
-                                                'Top 10 Tv Shows in india Today',
-                                            posterList: _top10tv.sublist(0, 10),
-                                          ),
+                                              title:
+                                                  'Top 10 Tv Shows in india Today',
+                                              posterList: _top10tv),
                                           Home_first_container(
-                                            title: 'Tense Dramas',
-                                            posterList:
-                                                _tensedramas.sublist(0, 10),
-                                          ),
+                                              title: 'Tense Dramas',
+                                              posterList: _tensedramas),
                                           Home_first_container(
-                                            title: 'South indian Cinema',
-                                            posterList:
-                                                _southindian.sublist(0, 10),
-                                          ),
+                                              title: 'South indian Cinema',
+                                              posterList: _southindian),
                                         ],
                                       ),
                                     ],
                                   );
+
+//released pastyear
                                 },
                               ),
                               scrollnotifier.value == true
@@ -375,9 +327,7 @@ class Homesecond_widget extends StatelessWidget {
             children: List.generate(
                 posterList.length,
                 (index) => Model_container(
-                    imagelink:
-                       posterList[index],
-                    index: index)),
+                    imagelink: posterList[index], index: index)),
           ),
         )
       ],

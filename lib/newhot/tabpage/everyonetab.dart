@@ -128,10 +128,7 @@ class Everyoneslist extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPersistentFrameCallback((_) {
-      BlocProvider.of<HotandnewBloc>(context)
-          .add(Loaddataineveryoneiswatching());
-    });
+
     return RefreshIndicator(
       onRefresh: () async{
          BlocProvider.of<HotandnewBloc>(context)

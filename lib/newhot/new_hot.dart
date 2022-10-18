@@ -13,7 +13,8 @@ import '../pages/conswidgets/constantelements.dart';
 import 'hotandnewbloc/hotandnew_bloc.dart';
 
 class Screennewandhot extends StatelessWidget {
-  const Screennewandhot({Key? key}) : super(key: key);
+   Screennewandhot({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class Screennewandhot extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+     
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(90),
             child: AppBar(
